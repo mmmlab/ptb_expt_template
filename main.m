@@ -66,28 +66,35 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Run the actual experiment
+% set up stimulus sequence
+% 1. create an ordered sequence with the appropriate number of trials per
+% condition
+ordered_speeds = [];
+for i=1:SP.NR_CONDS
+    ordered_speeds = [ordered_speeds,repmat(SP.DELTA_SPEEDS(i),...
+        1,SP.TRIALS_PER_COND)];
+end
+%2. randomize this sequence
+[randomized_speeds,junk] = Shuffle(ordered_speeds);
+
+
 % start block
 trial_count=1;
 
 while trial_count <= SP.NR_TRIALS
-    speed = 10.0; %deg/sec
-    distance = 10.0; %deg
-    [valid,targ_position,gaze_record]=trial(speed,distance);
-    
-    if (valid)
-        gaze_records{trial_count}=gaze_record;
-        targ_positions{trial_count}=targ_position;
-        trial_count=trial_count+1;  
-    end
+    delta_speed = randomized_speeds(trial_count); %deg/sec
+    [result,reference_velocity,comparison_velocity] = trial(delta_speed);
+    % store information from each block
+    block.delta_speeds(trial_count) = delta_speed;
+    block.results(trial_count) = result;
+    block.ref_vels(trial_count) = reference_velocity;
+    block.comp_vels(trial_count) = comparison_velocity;
+    trial_count=trial_count+1;  
 end
 
 
-
-trialData.gaze_records = gaze_records;
-trialData.targ_positions = targ_positions;
-
 % save the block data in a local file
-save('shutter_eyetracking_data.mat', 'trialData');
+save('block_data.mat', 'block');
 
 % shut down Psychtoolbox and the Eyelink connection
 Screen('CloseAll');

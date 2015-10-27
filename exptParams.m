@@ -20,8 +20,11 @@ display_params.scrP2D        = @screenPt2Deg; %converts dva location to screen p
 display_params.scrD2P        = @degPt2Screen; %converts screen pixel units to dva location
 
 %% Set all block & stimulus parameters here
-stimulus_params.NR_TRIALS      = 10; % number of test trials to run
-stimulus_params.NR_PRACTICE    = 5;  % number of practice trials 
+stimulus_params.REF_SPEED      = 20;  % reference stimulus speed (in dva/sec)
+stimulus_params.DELTA_SPEEDS   = [1.0,2.5,5.0,10]; % differences for comparison speeds
+stimulus_params.NR_CONDS       = length(stimulus_params.DELTA_SPEEDS);
+stimulus_params.TRIALS_PER_COND= 2;
+stimulus_params.NR_TRIALS      = stimulus_params.NR_CONDS*stimulus_params.TRIALS_PER_COND; % number of test trials to run
 stimulus_params.FIXATION_TOL   = 1.5;% tolerance (deg) for monitoring fixation
 stimulus_params.TARG_LUM       = 200;
 stimulus_params.NR_INTERVALS   = 4;
