@@ -28,6 +28,6 @@ This function waits for and/or processes keypresses.
 This function retrieves the most recent gaze position sample from the Eyelink tracker.
 
 #### simple_main.m:
-This function is superfluous and would not exist in a typical experiment. It implements a stripped-down bare-bones main function, that only displays a single frame then exit. It is just here as a minimal example of the code needed to display anything at all. 
+This function is superfluous and would not exist in a typical experiment. It implements a stripped-down, bare-bones main function that only displays a single frame then exits. It is just here as a minimal example of the code needed to display anything at all using the Psychtoolbox framework. 
  
 
