@@ -1,5 +1,5 @@
 function [x,y,time] = getEyelinkSample(eye_used)
-% function [x,y,time] = getEyelinkSample(eye_used)
+% [x,y,time] = getEyelinkSample(eye_used)
 %
 % returns the latest sample for 'eye used' (0=left eye, 1=right eye)
 

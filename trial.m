@@ -1,4 +1,13 @@
 function [result,reference_velocity,comparison_velocity]=trial(delta_speed)
+% [result,reference_velocity,comparison_velocity]=trial(delta_speed)
+%
+% runs a single trial of a simple 2AFC speed discrimination experiment with
+% a difference of delta_speed between the two intervals.
+%
+% returns the result (correct=1,incorrect=0), as well as the reference and
+% comparison velocities used in the trial.
+
+% Author: Melchi M. Michel  (07/2015)
 %% Compute & Load Global Parameters
 global DP; % display parameters
 global SP; % block & stimulus parameters

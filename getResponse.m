@@ -1,5 +1,5 @@
 function [keyname,keytime] = getResponse(isBlocking,startSecs)
-% function [keyname,keytime] = getResponse(isBlocking,startSecs)
+% [keyname,keytime] = getResponse(isBlocking,startSecs)
 % 
 % returns pressed key and time offset of keypress (keytime only valid when
 % optional arguments are provided)
@@ -11,6 +11,8 @@ global SP;
 
 if nargin<1
     isBlocking = false;
+    % If isBlocking is true, the function hangs until a keypress is
+    % detected. Otherwise, it returns immediately.
 end
 if nargin<2
     startSecs = 0;

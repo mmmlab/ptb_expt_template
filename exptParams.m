@@ -1,8 +1,9 @@
 function [dp,sp] = exptParams()
-% function [dp,sp] = exptParams()
+% [dp,sp] = exptParams()
 %
 % returns display parameter (dp) and stimulus parameter (sp) structures
 % for a simple experiment
+
 % Author: Melchi M. Michel  (07/2015)
 global display_params
 global stimulus_params
@@ -45,6 +46,8 @@ sp = stimulus_params;
 end
 
 function computeDisplayParams()
+    % Retrieves the display resolution using the video API and computes the
+    % pixel-to-degree conversion constants
     global display_params;
     scrn_res = Screen('Resolution',display_params.DISPLAY_NR);
     display_params.W_WIDTH = scrn_res.width;
