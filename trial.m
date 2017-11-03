@@ -36,7 +36,10 @@ while(~strcmp(key,'space')||(fixation_dist>SP.FIXATION_TOL))
         %if eyetracker is on, check fixation distance, otherwise it is zero 
         fixation_dist = 0;
     end
-    [key,keytime] = getResponse();   
+    [key,keytime] = getResponse();
+    if(key==-1)
+        return;
+    end
 end
 
 %% Stimulus setup
@@ -146,15 +149,18 @@ Screen('Flip', DP.WINPTR);
 % and 'j' for "second")
 while(~(strcmp(key,'f'))& ~(strcmp(key,'j')))
     [key,keytime] = getResponse();
+    if(key==-1)
+        return;
+    end
 end
 
 %show to subject feedback
 if(strcmp(key,'f')&firstIsFaster)|(strcmp(key,'j')&~firstIsFaster);
     result=1;
-    %SP.CORRECT_SND();
+    sound(SP.CORRECT_SND,SP.SND_FS);
 else
     result=0;
-    %SP.INCORRECT_SND();
+    sound(SP.INCORRECT_SND,SP.SND_FS);
 end
 
 if(isRefFirst)
