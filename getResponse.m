@@ -27,11 +27,11 @@ end
 
 % shuts down Eyelink connection and Psychtoolbox resources if Esc is pressed
 if keyCode(escapeKey)
-    Screen('CloseAll');
     if(DP.USING_GAZE)
         Eyelink('Shutdown');
-        setDACGamma(0);
+        %setDACGamma(0);
     end
+    Screen('CloseAll');
     keyname = -1; keytime = 0;
     return;
 end
@@ -46,8 +46,8 @@ if(isBlocking)
     while KbCheck; end
 end
 keyname = KbName(keyCode);
-if(iscell(keyname))
+if(iscell(keyname)||isempty(keyname))
     % returns an invalid response if two keys are pressed simultaneously
-    keyname = -1;
+    keyname = 0;
 end
 return
