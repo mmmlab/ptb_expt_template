@@ -76,7 +76,7 @@ WaitSecs(SP.SOA_TIME);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Start continuous recording of gaze position
-if(DP.EYELINK_ON)    
+if(DP.USING_GAZE)    
     eyelink_hrt('start',1);
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -144,7 +144,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Stop recording gaze position and retrieve position data
-if(DP.EYELINK_ON)     
+if(DP.USING_GAZE)     
     gazedata =  eyelink_hrt('stop'); %where gazedata = [x_vector,y_vector,t-vector]
     % x and y values are in pixels and need to be transformed using DP.scrP2D(x,y );
     gaze_record = DP.scrP2D(gazedata(:,1),gazedata(:,2));

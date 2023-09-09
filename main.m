@@ -89,12 +89,12 @@ while trial_count <= SP.NR_TRIALS
     block.results(trial_count) = result;
     block.ref_vels(trial_count) = reference_velocity;
     block.comp_vels(trial_count) = comparison_velocity;
-    block.gaze_data(trial_count) = gaze_data;
+    block.gaze_data{trial_count} = gaze_data;
     trial_count=trial_count+1;  
 end
 
 
-% save the block data in a local file
+% save the block data in a local filej
 save('block_data.mat', 'block');
 
 % shut down Psychtoolbox and the Eyelink connection

@@ -10,8 +10,8 @@ global stimulus_params
 
 %% Set all display parameters here
 displays = Screen('Screens'); % get a list of all the displays
-display_params.USING_GAZE    = 0; % boolean flag indicating whether we're using the eyetracker
-display_params.DISPLAY_NR    = displays(end); % automatically choose appropriate display
+display_params.USING_GAZE    = 1; % boolean flag indicating whether we're using the eyetracker (0=No,1=Yes)
+display_params.DISPLAY_NR    = displays(end-1); % automatically choose appropriate display
 display_params.DISPLAY_DIAG  = 0.49;% lab CRT 0.546; % for 21.5 in monitor
 display_params.SUBJ_DIST     = 0.7; % lab display (meters)
 display_params.FRAME_RATE    = 100; % for lab display (make sure to test this)
@@ -36,10 +36,10 @@ stimulus_params.MEAN_LUM       = 128;
 stimulus_params.STIM_TIME      = 0.5; % stimulus duration (seconds)
 stimulus_params.ISI_TIME       = 0.5; % duration of interstimulus interval (secs)
 stimulus_params.SOA_TIME       = 0.5; % stimulus onset asynchrony
-%stimulus_params.CORRECT_SND    = audioread('shortding.wav')';
-%stimulus_params.INCORRECT_SND  = audioread('donk.wav')';
+stimulus_params.CORRECT_SND    = audioread('shortding.wav')';
+stimulus_params.INCORRECT_SND  = audioread('donk.wav')';
 %stimulus_params.RESP_SND       = audioread('shortbeep.wav')';
-%stimulus_params.SND_FS         = 22050; % sound sampling rate (Hz)
+stimulus_params.SND_FS         = 22050; % sound sampling rate (Hz)
 %stimulus_params.SND_HANDLE     = 0; % this must be set in exptMain() function
 
 dp = display_params;
