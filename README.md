@@ -10,13 +10,13 @@ The experiment itself isn't very interesting. The primary purpose of this templa
 
 #### main.m: 
 This is the entry point into the program and the only function that is called directly from the command line. It essentially runs a block of trials. Typically this consists of 4 tasks
-1. Setting up and initializing the display environment and the eye tracker (if appropriate).
+1. Setting up and initializing the display environment and the eye tracker (if available).
 2. Setting up the trial sequence
 3. Executing a loop that runs individual trials (via the `trial` function) until the block is complete
 4. Saving the results of the block
 
 #### trial.m:
-This function runs a single experimental trial. Typically, this function includes one or more subfunctions that define repetitive subtasks (such as the drawing of cue markers). It typically takes one or more arguments defining parameters of the individual trial returns the results of the trial (i.e., success or failure) along with other information (e.g., eye position, interval order, etc.).
+This function runs a single experimental trial. Typically, this function includes one or more subfunctions that define repetitive subtasks (such as the drawing of cue markers). It typically takes one or more arguments defining parameters of the individual trial and returns the results of the trial (i.e., success or failure) along with other information (e.g., eye position, interval order, etc.).
 
 #### exptParams.m:
 This function sets up and returns a pair of structures (`display_parameters` and `stimulus_parameters`) that define the global parameters of the experiment. This (not the `main` or `trial` functions) is where you should indicate any parameters that are relevant to either the visual stimulus (e.g., size, spatial frequency, interstimulus interval duration, etc.) or to the physical set up of the display (e.g., screen size, subject distance, etc.).  

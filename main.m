@@ -83,12 +83,13 @@ trial_count=1;
 
 while trial_count <= SP.NR_TRIALS
     delta_speed = randomized_speeds(trial_count); %deg/sec
-    [result,reference_velocity,comparison_velocity] = trial(delta_speed);
+    [result,reference_velocity,comparison_velocity,gaze_data] = trial(delta_speed);
     % store information from each block
     block.delta_speeds(trial_count) = delta_speed;
     block.results(trial_count) = result;
     block.ref_vels(trial_count) = reference_velocity;
     block.comp_vels(trial_count) = comparison_velocity;
+    block.gaze_data(trial_count) = gaze_data;
     trial_count=trial_count+1;  
 end
 

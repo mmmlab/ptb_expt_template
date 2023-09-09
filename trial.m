@@ -1,4 +1,4 @@
-function [result,reference_velocity,comparison_velocity]=trial(delta_speed)
+function [result,reference_velocity,comparison_velocity,gaze_record]=trial(delta_speed)
 % [result,reference_velocity,comparison_velocity]=trial(delta_speed)
 %
 % runs a single trial of a simple 2AFC speed discrimination experiment with
@@ -75,6 +75,11 @@ Screen('Flip', DP.WINPTR);
 WaitSecs(SP.SOA_TIME);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Start continuous recording of gaze position
+if(DP.EYELINK_ON)    
+    eyelink_hrt('start',1);
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Interval 1: Show First Drifting Stimulus
 % compute the 'discrete speed' or the amount by which we have to shift
 % the target on each frame
@@ -135,6 +140,16 @@ while(abs(current_xpos)<=distance)
     Screen('FillOval',DP.WINPTR,SP.MARKER_LUM,DP.pixRect([current_xpos,0,0.25,0.25]));
     % swap buffers
     Screen('Flip', DP.WINPTR);
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Stop recording gaze position and retrieve position data
+if(DP.EYELINK_ON)     
+    gazedata =  eyelink_hrt('stop'); %where gazedata = [x_vector,y_vector,t-vector]
+    % x and y values are in pixels and need to be transformed using DP.scrP2D(x,y );
+    gaze_record = DP.scrP2D(gazedata(:,1),gazedata(:,2));
+else
+    gaze_record = [];
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Deterimine Accuracy and Do Cleanup
